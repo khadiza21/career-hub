@@ -1,0 +1,4 @@
+- freefik
+- icons8
+- lottiefies
+- farmer motion
