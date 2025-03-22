@@ -2,3 +2,4 @@
 - icons8
 - lottiefies
 - farmer motion
+- react-icons

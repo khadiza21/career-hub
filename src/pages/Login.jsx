@@ -2,8 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
 import AuthContext from '../context/AuthContext/AuthContext';
 import SocialLogin from './SocialLogin';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location.state || '/' ;
 
     const [formData, setFormData] = useState({
         email: "",
@@ -27,7 +31,7 @@ const Login = () => {
             setError("Please fill in all fields correctly.");
         } else {
             setError("");
-            alert("Sign-up successful!");
+            
         }
 
         setValidated(true);
@@ -36,6 +40,8 @@ const Login = () => {
         signInUser(formData?.email, formData?.password)
             .then(result => {
                 console.log('sign in', result.user)
+                alert("Sign-up successful!");
+                navigate(from)
             })
             .catch(error => {
                 console.log(error);
