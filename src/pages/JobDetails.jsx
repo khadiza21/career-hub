@@ -26,9 +26,9 @@ const navigate = useNavigate();
                     <strong>Education:</strong> {job.educational_requirements} <br />
                     <strong>Experience:</strong> {job.experiences} <br />
                     <strong>Contact Information:</strong> <br />
-                    - <strong>Phone:</strong> {job.contact_information.phone} <br />
-                    - <strong>Email:</strong> {job.contact_information.email} <br />
-                    - <strong>Address:</strong> {job.contact_information.address}
+                    - <strong>Phone:</strong> {job.contact_information?.phone} <br />
+                    - <strong>Email:</strong> {job.contact_information?.email} <br />
+                    - <strong>Address:</strong> {job.contact_information?.address}
                 </Card.Text>
                   <Button variant="primary" onClick={() => navigate(`/jobApply/${job._id}`)}>Apply Now</Button>
               

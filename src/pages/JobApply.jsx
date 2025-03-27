@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const JobApply = () => {
     const { id } = useParams();
-    console.log(id);
+    const navigate = useNavigate();
+    const { user } = useAuth();
 
     const submitJobApplication = e => {
         e.preventDefault();
@@ -12,8 +14,30 @@ const JobApply = () => {
         const linkedIn = form.linkedIn.value;
         const github = form.github.value;
         const resume = form.resume.value;
-        console.log(linkedIn, github, resume);
-    }
+
+        const jobApplication = {
+            job_id: id,
+            applicant_email: user.email,
+            linkedIn, github, resume
+
+        }
+
+
+        fetch("http://localhost:5000/job-applications", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jobApplication),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                navigate('/myApplications')
+            })
+
+   
+        }
 
 
     return (
@@ -34,8 +58,8 @@ const JobApply = () => {
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="resume">
-                                <Form.Label>Resume (PDF)</Form.Label>
-                                <Form.Control type="file" name="resume" accept=".pdf" required />
+                                <Form.Label>Resume (URL)</Form.Label>
+                                <Form.Control type="url" name="resume" accept=".pdf" required />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">

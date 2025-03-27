@@ -29,6 +29,11 @@ const NavbarComponent = () => {
                             navbarScroll
                         >
                             <Nav.Link href="/">Home</Nav.Link>
+                            {user && <>
+                                <Nav.Link href="/addJob">Add Job</Nav.Link>
+                                <Nav.Link href="/myApplications">My Applications</Nav.Link>
+                                <Nav.Link href="/myPostedJobs">My Posted Jobs</Nav.Link>
+                            </>}
 
                         </Nav>
 
@@ -36,9 +41,11 @@ const NavbarComponent = () => {
 
                             user ?
                                 <div>
+                                    
                                     <Button onClick={handleSignOut} variant="primary" type="submit" className="w-100">
                                         Sign Out
                                     </Button>
+                                    
                                 </div> :
                                 <div className="d-flex gap-4 me-end">
                                     <Nav.Link href="/login">Login</Nav.Link>
